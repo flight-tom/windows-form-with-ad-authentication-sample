@@ -26,14 +26,20 @@ Fill the real location here, and remove the fake login between **if(DEBUG) ... #
 ```
 
 ```mermaid
-graph LR
-    0((start)) --> 1(Program)
-    subgraph WinForm Application
-        1 -->
-        A(Login) -->
-        B(Main)
-    end
-    B --> 99((end))
+sequenceDiagram
+    actor user
+    participant p as Program
+    participant l as Login
+    participant m as MainForm
+    user ->> p: Main()
+    p ->> l: ShowDialog
+    l -->> user: void
+    user ->> l: btnLogin
+    l ->> l: IsAuthenticated
+    l ->> l: Hide
+    l ->> m: ShowDialog
+    m -->> l: close
+    l -->> user: close
 ```
 Try as you need.
 
